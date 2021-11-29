@@ -7,7 +7,7 @@ class App extends React.Component{
     this.state = {
       squares: Array(9).fill(null),
       count: 0,
-      status: "",
+      status: "302",
       countGame: 2,
       statusCount: "Идёт 1 игра",
       show: true,
@@ -59,15 +59,22 @@ class App extends React.Component{
   resetGame = () => {
     this.setState({ squares: Array(9).fill(null) });
     this.setState({ count: 0 });
-    this.setState({ countGame: this.state.countGame + 1});
+    if (!this.state.squares.every(e => e === null)){
+      this.setState({ countGame: this.state.countGame + 1});
+    }
+
     this.setState({ statusCount: `Идёт ${this.state.countGame} игра`})
+
+    if (this.flag === true || this.state.status === "Ого, похоже, у вас ничья!"){
+      this.showHide();
+    }
     this.flag = null;
-    console.log(this.state.show);
-    this.showHide();
-    console.log(this.state.show);
   }
 
   clickHandler = e => {
+    if (this.flag === true){
+      return 1;
+    }
     this.setState({ show: false})
     let data = e.target.getAttribute("data");
     let currenSquare = this.state.squares;
@@ -79,19 +86,19 @@ class App extends React.Component{
     this.isWinner();
     }
 
-    test = (e) =>{
-      console.log(e.target)
-    }
-
-    remove = () => {
-      console.log(document.querySelector(".tic-tac-toe"))
-      return (
-      document.querySelector(".tic-tac-toe").removeEventListener("click", this.test),[])
-}
+//     test = (e) =>{
+//       console.log(e.target)
+//     }
+//
+//     remove = () => {
+//       console.log(document.querySelector(".tic-tac-toe"))
+//       return (
+//       document.querySelector(".tic-tac-toe").removeEventListener("click", this.test),[])
+// }
   render(){
     return (
       <div className="tic-tac-toe" >
-        <div className="game" onClick={this.test}>
+        <div className="game" >
         <div className="ttt-grid" onClick={this.clickHandler} data="0">{this.state.squares[0]}</div>
         <div className="ttt-grid" onClick={this.clickHandler} data="1">{this.state.squares[1]}</div>
         <div className="ttt-grid" onClick={this.clickHandler} data="2">{this.state.squares[2]}</div>
@@ -111,8 +118,7 @@ class App extends React.Component{
           </div>
         <p>{this.state.statusCount}</p>
         <p>{this.state.status}</p>
-        <div>{this.state.show && this.choose}</div>
-        <button onClick={this.remove}>Remove</button>
+        <div className="choose">{this.state.show && this.choose}</div>
       </div>
     );
   }
