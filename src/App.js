@@ -31,7 +31,7 @@ class App extends React.Component{
 
       this.flag = null;
 
-      this.choose = <div onClick={this.showHide}>Первый ход<br /> <button>X</button><button onClick={this.change}>O</button></div>
+      this.choose = <div onClick={this.showHide}>Первый ход<br /> <button  className={"xo"}>X</button><button onClick={this.change} className={"xo"}>O</button></div>
   }
 
   showHide = () => this.setState((currentState) => ({show: !currentState.show}));
@@ -92,10 +92,12 @@ class App extends React.Component{
         <div className="ttt-grid" onClick={this.clickHandler} data="7">{this.state.squares[7]}</div>
         <div className="ttt-grid" onClick={this.clickHandler} data="8">{this.state.squares[8]}</div>
         <br/>
-        <button onClick={this.resetGame}>Начать новую игру</button>
+        <button className={"reset"} onClick={this.resetGame}>Начать новую игру</button>
+        <div className="count">
         <p>Счёт:</p>
           <p>Первый игрок: {this.stats["X"]}</p>
           <p>Второй игрок: {this.stats["O"]}</p>
+          </div>
         <p>{this.state.statusCount}</p>
         <p>{this.state.status}</p>
         <div>{this.state.show && this.choose}</div>

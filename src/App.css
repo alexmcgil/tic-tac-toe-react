@@ -23,3 +23,23 @@
   text-align: center;
   line-height: 2.75;
 }
+
+.reset {
+  width: 150px;
+  height: 25px;
+  margin: 10px 0;
+}
+
+p{
+  margin: 5px 0;
+}
+
+.count {
+  padding: 5px;
+  border: 2px solid black;
+}
+
+.xo{
+  width: 50%;
+  margin: 7px 0;
+}
