@@ -79,9 +79,19 @@ class App extends React.Component{
     this.isWinner();
     }
 
+    test = (e) =>{
+      console.log(e.target)
+    }
+
+    remove = () => {
+      console.log(document.querySelector(".tic-tac-toe"))
+      return (
+      document.querySelector(".tic-tac-toe").removeEventListener("click", this.test),[])
+}
   render(){
     return (
-      <div className="tic-tac-toe">
+      <div className="tic-tac-toe" >
+        <div className="game" onClick={this.test}>
         <div className="ttt-grid" onClick={this.clickHandler} data="0">{this.state.squares[0]}</div>
         <div className="ttt-grid" onClick={this.clickHandler} data="1">{this.state.squares[1]}</div>
         <div className="ttt-grid" onClick={this.clickHandler} data="2">{this.state.squares[2]}</div>
@@ -91,6 +101,7 @@ class App extends React.Component{
         <div className="ttt-grid" onClick={this.clickHandler} data="6">{this.state.squares[6]}</div>
         <div className="ttt-grid" onClick={this.clickHandler} data="7">{this.state.squares[7]}</div>
         <div className="ttt-grid" onClick={this.clickHandler} data="8">{this.state.squares[8]}</div>
+        </div>
         <br/>
         <button className={"reset"} onClick={this.resetGame}>Начать новую игру</button>
         <div className="count">
@@ -101,6 +112,7 @@ class App extends React.Component{
         <p>{this.state.statusCount}</p>
         <p>{this.state.status}</p>
         <div>{this.state.show && this.choose}</div>
+        <button onClick={this.remove}>Remove</button>
       </div>
     );
   }
